@@ -1,0 +1,8 @@
+data <- read.csv(file("data/data_example1.csv", encoding = "Shift_JIS"))
+sapporo <- subset(data, 都道府県 == 1)
+sapporo <- transform(sapporo, kakou_jinkou=sapporo$総人口/500000)
+sapporo <- transform(sapporo, kakou_kinyu=sapporo$金融保険業人口/10000)
+result_sapporo <- glm(sapporo$kakou_kinyu ~ sapporo$kakou_jinkou)
+print(summary(result_sapporo))
+plot(sapporo$kakou_jinkou, sapporo$kakou_kinyu)
+abline(result_sapporo)
