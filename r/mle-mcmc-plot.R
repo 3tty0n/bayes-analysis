@@ -46,7 +46,7 @@ prefecture_list <- c("札幌市", "仙台市", "東京都", "名古屋市", "京
 
 for (i in 1:7) {
   pre <- subset(d, prefectures == i)
-  plot(pre$population, pre$finance)
+  plot(pre$population, pre$finance, ylim=c(-0.05, 0.5))
   title(prefecture_list[[i]])
   abline(b=a_lik[[i]], a=b_lik[[i]], col="blue")
   abline(b=a_sum[[i]], a=b_sum[[i]], col="red")
