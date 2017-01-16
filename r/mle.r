@@ -1,9 +1,9 @@
 setwd("~/workspace/r-analysis")
 
 data <- read.csv(file("data/data_example1.csv", encoding = "Shift_JIS"))
-sapporo <- subset(data, 都道府県 == 1)
-sapporo <- transform(sapporo, kakou_jinkou=sapporo$総人口/500000)
-sapporo <- transform(sapporo, kakou_kinyu=sapporo$金融保険業人口/10000)
+sapporo <- subset(data, prefectures == 1)
+sapporo <- transform(sapporo, kakou_jinkou=sapporo$population/500000)
+sapporo <- transform(sapporo, kakou_kinyu=sapporo$finance/10000)
 
 H1 = sum(sapporo$kakou_jinkou^2)
 H2 = sum(sapporo$kakou_jinkou)
