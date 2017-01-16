@@ -10,3 +10,5 @@ ggmcmc(ggs(fit, inc_warmup=TRUE, stan_include_auxiliar=TRUE),
        file='output/fit-traceplot-2.pdf', plot='traceplot')
 
 ggmcmc(ggs(fit), file='output/fit-ggmcmc-2.pdf')
+
+dev.off()
