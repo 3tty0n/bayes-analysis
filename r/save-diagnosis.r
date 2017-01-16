@@ -1,7 +1,7 @@
 library(rstan)
 library(ggmcmc)
 
-load('../output/result.RData')
+load('../output/result-bayes-mcmc.RData')
 
 write.table(data.frame(summary(fit)$summary),
             file='../output/fit-summary.txt', sep='\t', quote=FALSE, col.names=NA)
