@@ -50,6 +50,11 @@ for (i in 1:7) {
   title(prefecture_list[[i]])
   abline(b=a_lik[[i]], a=b_lik[[i]], col="blue")
   abline(b=a_sum[[i]], a=b_sum[[i]], col="red")
+  legend("topleft",
+         legend=c("最尤推定", "階層ベイズ法"),
+         lty=c(1, 1),
+         col=c("blue", "red")
+  )
 }
 
 dev.off()
