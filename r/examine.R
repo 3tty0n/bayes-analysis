@@ -15,7 +15,7 @@ for (k in 1:K) {
   Y <- append(Y, c(ratio.sum))
 }
 
-M <- mean(unlist(Y))
+M <- mean(Y)
 S <- sqrt(variance(Y))
 Z <- c()
 for (k in 1:K) {
