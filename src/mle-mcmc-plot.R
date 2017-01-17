@@ -10,20 +10,20 @@ b.likelihood <- list()
 
 likelihood <- function(x) {
   prefecture <- subset(d, prefectures == x)
-  
+
   H1 = sum(prefecture$population^2)
   H2 = sum(prefecture$population)
   H3 = H2
   H4 = length(prefecture$population)
-  
+
   v1 = sum(prefecture$population * prefecture$finance)
   v2 = sum(prefecture$finance)
-  
+
   H = matrix(c(H1, H2, H3, H4), 2, 2)
   v = matrix(c(v1, v2), 2, 1)
-  
+
   HInv = solve(H)
-  
+
   HInv %*% v
 }
 
@@ -50,7 +50,7 @@ for (i in 1:7) {
   fin.max <- max(pre$finance)
   plot(pre$population, pre$finance,
        xlab="人口総数",
-       ylab="金融保険業人口", 
+       ylab="金融保険業人口",
        xlim=c(0.0, pop.max),
        ylim=c(0.0, fin.max))
   title(prefecture_list[[i]])
@@ -69,6 +69,5 @@ barplot(unlist(a.summary), names.arg = c(1:7), col = "blue", main = "a(k) by Bay
 barplot(unlist(b.summary), names.arg = c(1:7), col = "blue", main = "b(k) by Bayes")
 barplot(unlist(a.likelihood), names.arg = c(1:7), col = "orange", main = "a(k) by ML")
 barplot(unlist(b.likelihood), names.arg = c(1:7), col = "orange", main = "b(k) by ML")
-
 
 dev.off()
