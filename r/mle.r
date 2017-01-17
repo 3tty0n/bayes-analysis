@@ -32,9 +32,13 @@ prefecture_list <- c("札幌市", "仙台市", "東京都", "名古屋市", "京
 
 for (i in 1:7) {
     pre <- subset(data, prefectures == i)
-    plot(pre$population, pre$finance)
+    x.max <- max(pre$population)
+    y.max <- max(pre$finance)
+    plot(pre$population, pre$finance,
+         xlab="人口総数", ylab="金融保険業",
+         ylim=c(0, y.max), xlim=c(0, x.max))
     title(prefecture_list[[i]])
-    abline(b=a[[i]], a=b[[i]], col="blue")
+    abline(b=a[[i]], a=b[[i]], col="red")
 }
 
 dev.off()
