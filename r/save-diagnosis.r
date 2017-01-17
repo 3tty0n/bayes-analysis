@@ -10,7 +10,7 @@ write.table(data.frame(summary(fit)$summary),
             col.names=NA)
 
 ggmcmc(ggs(fit, inc_warmup=TRUE, stan_include_auxiliar=TRUE),
-       file='output/fit-traceplot-tmp.pdf', 
+       file='output/fit-traceplot-inc-warmup.pdf',
        plot='traceplot')
 
 ggmcmc(ggs(fit), 
