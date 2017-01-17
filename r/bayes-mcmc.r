@@ -1,10 +1,16 @@
 library(rstan)
 
-d <- read.csv('../data/data_example1_fit.csv')
+d <- read.csv('input/data_example1_fit.csv')
 N <- nrow(d)
 K <- 7
 PRE <- d$prefectures
-data <- list(N=N,K=K, X=d$population, Y=d$finance, PRE=PRE)
-fit <- stan(file='model/bayes-mcmc.stan', data=data, seed=12345)
+data <- list(N=N,
+             K=K, 
+             X=d$population, 
+             Y=d$finance, PRE=PRE)
 
-save.image(file='output/result-bayes-mcmc-2.RData')
+fit <- stan(file='model/bayes-mcmc.stan',
+            data=data, 
+            seed=12345)
+
+save.image(file='output/result-bayes-mcmc.RData')
