@@ -24,7 +24,7 @@ likelihood <- function(x) {
   
   HInv = solve(H)
   
-  crossprod(HInv, v)
+  HInv %*% v
 }
 
 for (x in 1:7) {

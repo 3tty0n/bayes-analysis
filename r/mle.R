@@ -16,7 +16,7 @@ likelihood <- function(x) {
 
     HInv = solve(H)
 
-    crossprod(HInv, v)
+    HInv %*% v
 }
 
 a <- list()
