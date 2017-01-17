@@ -17,14 +17,14 @@ for (k in 1:K) {
 
 M <- mean(Y)
 S <- sqrt(variance(Y))
-Z <- c()
+Z <- list()
 for (k in 1:K) {
   Z <- append(Z, (Y[k] - M)/S)
 }
 
-result <- c()
+result <- list()
 for (k in 1:K) {
-  if (abs(Z[k]) > 2.58) {
+  if (abs(unlist(Z)[k]) > 2.58) {
     result <- append(result, c(k, Z[k]))
   }
 }
