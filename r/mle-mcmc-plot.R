@@ -63,4 +63,12 @@ for (i in 1:7) {
   )
 }
 
+png('output/image/mle-bar.png')
+par(mfrow=c(2, 2))
+barplot(unlist(a.summary), names.arg = c(1:7), col = "blue", main = "a(k) by Bayes")
+barplot(unlist(b.summary), names.arg = c(1:7), col = "blue", main = "b(k) by Bayes")
+barplot(unlist(a.likelihood), names.arg = c(1:7), col = "orange", main = "a(k) by ML")
+barplot(unlist(b.likelihood), names.arg = c(1:7), col = "orange", main = "b(k) by ML")
+
+
 dev.off()
