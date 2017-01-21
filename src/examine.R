@@ -1,7 +1,7 @@
 library('ggplot2')
 
 d <- read.csv('input/data_example2.csv')
-X <- d$under15.man / d$population
+X <- d$under15man / d$population
 K <- 47
 d <- transform(d, ratio=X)
 
