@@ -9,7 +9,7 @@ import seaborn as sns
 K = 47
 
 
-def crop(df):
+def processing(df):
     x = data.under15man / data.population
     df['x'] = x
     return df
@@ -36,9 +36,7 @@ def examine(df):
     y = ratio_each_city(df)
     z = []
     for k in range(K):
-        z.append((y[k] - m) / s)
-    for k in range(K):
-        z[k] = abs(z[k])
+        z.append(abs((y[k] - m) / s))
     ans = []
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
@@ -55,5 +53,5 @@ def examine(df):
 
 if __name__ == '__main__':
     data = pd.read_csv('input/data_example2.csv')
-    data = crop(data)
+    data = processing(data)
     print(examine(df=data))
