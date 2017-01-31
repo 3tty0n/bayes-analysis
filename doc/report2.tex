@@ -1,0 +1,20 @@
+\documentclass[a4paper,xelatex,ja=standard,jafont=hiragino-pron, 9pt]{bxjsarticle}
+
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{frame}
+\usepackage{xcolor}
+\usepackage{float}
+\let\origfigure=\figure
+\let\endorigfigure=\endfigure
+\renewenvironment{figure}[1][]{%
+  \origfigure[H]
+}{%
+  \endorigfigure
+}
+
+\def\tightlist{\itemsep1pt\parskip0pt\parsep0pt}
+
+\begin{document}
+  \input{share/report2.tex}
+\end{document}
