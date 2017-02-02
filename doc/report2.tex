@@ -48,8 +48,8 @@
 
 \begin{eqnarray}
   K \left( p(k|a) \ || \ p(k|b) \right) \nonumber
-  &=& \sum_{k=0}^{\infty} p(k|a) \log \frac{a^k / k! \ \exp(-a)}{b^k / k! \ \exp(-b)} \\ \nonumber
-  &=& \sum_{k=0}^{\infty} p(k|a) \log \left( \left(\frac{a}{b} \right)^k \exp(-a+b)　\right)　\\ \nonumber
+  &=& \sum_{k=0}^{\infty} p(k|a) \log \frac{ \frac{a^k}{k!}  \exp(-a)}{\frac{b^k}{k!} \exp(-b)} \\ \nonumber
+  &=& \sum_{k=0}^{\infty} p(k|a) \log \Bigl\{ \left(\frac{a}{b} \right)^k \exp(-a+b)　\Bigr\}　\\ \nonumber
   &=& \sum_{k=0}^{\infty} \frac{a^k}{k!} \exp(-a) \Bigl\{ k(\log a - \log b) - a + b \Bigr\} \\ \nonumber
   &=& \sum_{k=0}^{\infty} \Bigl\{ a \frac{a^{k-1}}{(k-1)!} \exp(-a) (\log a - \log b) - \frac{a^k}{k!}(a - b)\Bigr\} \\ \nonumber
   &=& a(\log a - \log b) - (a - b)\exp(a)
@@ -57,7 +57,7 @@
 
 \subsection*{(2)}
 
-尤度関数は統計モデルのサンプルの席で表される。
+尤度関数は統計モデルのサンプルの積で表される。
 \begin{eqnarray}
   p(X|a)
   &=& \prod_{i=1}^n \frac{1}{\sqrt{2\pi}} \exp \left( - \frac{(x_i - a)^2}{2} \right) \\ \nonumber
@@ -109,6 +109,8 @@ aは正規分布に従う。
 \end{equation}
 
 となる。
+
+\subsection*{(3)}
 
 \subsection*{(4)}
 
