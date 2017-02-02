@@ -1,5 +1,4 @@
 \documentclass[a4j,xelatex,ja=standard,jafont=hiragino-pron, 9pt]{bxjsarticle}
-% \documentclass[a4j, 9pt]{jsarticle}
 
 \usepackage{graphicx}
 \usepackage{frame}
@@ -29,9 +28,92 @@
   showstringspaces=ture,
   frame=single
 }
+\usepackage{amssymb}
+
 \def\tightlist{\itemsep1pt\parskip0pt\parsep0pt}
 
+\title{データ解析レポート課題・第二}
+\author{14\_01043 \ 伊澤侑祐}
+\date{}
+
 \begin{document}
+
+\maketitle
+
+\section*{計算問題1}
+
+\subsection*{(1)}
+
+計算すると以下のようになる。
+
+\begin{eqnarray}
+  K \left( p(k|a) \ || \ p(k|b) \right) \nonumber
+  &=& \sum_{k=0}^{\infty} p(k|a) \log \frac{a^k / k! \ \exp(-a)}{b^k / k! \ \exp(-b)} \\ \nonumber
+  &=& \sum_{k=0}^{\infty} p(k|a) \log \left( \left(\frac{a}{b} \right)^k \exp(-a+b)　\right)　\\ \nonumber
+  &=& \sum_{k=0}^{\infty} \frac{a^k}{k!} \exp(-a) \Bigl\{ k(\log a - \log b) - a + b \Bigr\} \\ \nonumber
+  &=& \sum_{k=0}^{\infty} \Bigl\{ a \frac{a^{k-1}}{(k-1)!} \exp(-a) (\log a - \log b) - \frac{a^k}{k!}(a - b)\Bigr\} \\ \nonumber
+  &=& a(\log a - \log b) - (a - b)\exp(a)
+\end{eqnarray}
+
+\subsection*{(2)}
+
+尤度関数は統計モデルのサンプルの席で表される。
+\begin{eqnarray}
+  p(X|a)
+  &=& \prod_{i=1}^n \frac{1}{\sqrt{2\pi}} \exp \left( - \frac{(x_i - a)^2}{2} \right) \\ \nonumber
+  &=& \left(\frac{1}{\sqrt{2\pi}}\right)^2 \exp \left(-\frac{1}{2} \sum_{i=1}^n (x_i - a)^2 \right)
+\end{eqnarray}
+
+aは正規分布に従う。
+
+\begin{eqnarray}
+  p(a) = \frac{1}{\sqrt{2\pi}} \exp \left(- \frac{a^2}{2} \right)
+\end{eqnarray}
+
+以上より、尤度と事前分布の積を考えると、
+
+\begin{eqnarray}
+  p(a|X)
+  &=& \left(\frac{1}{\sqrt{2\pi}}\right)^n
+    \exp \left(-\frac{1}{2} \sum_{i=1}^n (x_i - a)^2\right)
+    \times \frac{1}{\sqrt{2n}} \exp \left(- \frac{1}{2} a^2\right) \nonumber \\
+  &\propto& \exp \left(- \frac{a^2}{2} - \frac{\sum_{i=1}^n (x_i - a)^2}{2}\right)
+\end{eqnarray}
+
+となる。カーネルをまとめると、$x_i$の平均を$\bar{x}$と置いて、
+
+\begin{eqnarray}
+  \sum_{i=1}^n(x_i - a)^2
+  &=& \sum_{i=1}^n (x_i - \bar{x} + \bar{x} - a)^2 \nonumber \\
+  &=& \sum_{i=1}^n (x_i - \bar{x})^2 + n(\bar{x} - a)^2
+\end{eqnarray}
+
+となる。したがって、
+
+\begin{eqnarray}
+  p(a|X)
+  &\propto& \exp \left[- \frac{a^2}{2} - \frac{n(\bar{x} - a)^2}{2}\right] \nonumber \\
+  &\propto& \exp \left[- \frac{a^2 + n(\bar{x} - a)^2}{2} \right] \nonumber \\
+  &\propto& \exp
+    \left[- \frac{
+      (n + 1) \{ a - \frac{n}{n+1}\bar{x} \}^2 - \frac{\bar{x}^2}{n+1}
+    }{2}
+    \right] \nonumber \\
+  &\propto& \exp \left[ - \frac{(a - \frac{n}{n+1}\bar{x})^2}{2(n+1)}\right]
+\end{eqnarray}
+
+よって、
+
+\begin{equation}
+  a|X \sim N\left(\frac{n}{n+1}\bar{x}, \frac{1}{\sqrt{n+1}}\right) \sim N\left(\frac{\sum_{i=1}^n x_i}{n+1}, \frac{1}{\sqrt{n+1}}\right)
+\end{equation}
+
+となる。
+
+\subsection*{(4)}
+
+何度も繰り返せば一度は帰無仮説が棄却されてしまうので、多角的な観点から検証する必要がある。
+
 \section*{応用問題1}
 \addcontentsline{toc}{section}{応用問題1}
 
@@ -89,9 +171,9 @@ for (x in 1:7) {
 は各都市における値である。 Stanで書いたモデルのモデル式は次の通り。
 
 \begin{eqnarray}
-  Y[n] &\sim& Normal(b[PRE[n]] + a[PRE[n]] \times X[n], \sigma_Y) \\
-  a[k] &\sim& Normal(\hat{a}, \sigma_a) \\
-  b[k] &\sim& Normal(\hat{b}, \sigma_b)
+  Y[n] &\sim& \textbf{Normal}(b[PRE[n]] + a[PRE[n]] \times X[n], \sigma_Y) \\
+  a[k] &\sim& \textbf{Normal}(\hat{a}, \sigma_a) \\
+  b[k] &\sim& \textbf{Normal}(\hat{b}, \sigma_b)
 \end{eqnarray}
 
 この書き方は、「すべての都市の平均を \(\hat{a}\), であり、各都市の
@@ -157,12 +239,10 @@ for (x in 1:7) {
 
 次のRスクリプトで計算した結果、
 
-\begin{itemize}
-  \item
-    平均$m_0 = 0.06476075$
-  \item
-    標準偏差$s_0 = 0.01153776$
-\end{itemize}
+\begin{eqnarray}
+    m_0 &=& 0.06476075  \\
+    s_0 &=& 0.01153776
+\end{eqnarray}
 
 となった。
 
@@ -182,6 +262,18 @@ s0 <- sqrt(variance(X))
 
 \subsection*{(3)}
 
+(2) の帰無仮説が正しいとすると $Z_k = (Y_k - M) / S$ は平均0、標準偏差1の正規分布に従う。
+したがって、$|Z_k| > 2.58$となる確率は0.01である。
+$Z_k$を用いて有意水準0.01の検定を47個の都道府県すべてで行うと、その結果は以下のようになる。
 
+\begin{figure}
+  \centering
+  \includegraphics[width=12cm]{../src/output/image/examine.png}
+  \caption{検定の結果}
+  \label{}
+\end{figure}
 
+帰無仮説が棄却された都道府県の名前は
+\textbf{都道府県番号1：北海道}
+であり、その$Z_k$の値は\textbf{4.94}である。
 \end{document}
