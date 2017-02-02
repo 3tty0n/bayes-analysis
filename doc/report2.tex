@@ -112,6 +112,29 @@ aは正規分布に従う。
 
 \subsection*{(3)}
 
+2つのモデルについて\textbf{AIC}と\textbf{BIC}を求める。
+
+$p_1(x|a_1)$、$p_2(x|a_2)$の\textbf{AIC}と\textbf{BIC}を$AIC_1, BIC_1, AIC_2, BIC_2$と置くと、
+以下のようになる。
+
+\begin{eqnarray}
+  AIC_1 &=& -2 \times 36.1 + 2 \times 1 = -70.2 \\
+  BIC_1 &=& -2 \times 36.1 + \log 500 \times 1 = -65.985391901577813 \cdots \simeq -66.0 \\
+  AIC_2 &=& -2 \times 37.8 + 2 \times 2 = -71.6 \\
+  BIC_2 &=& -2 \times 37.8 + \log 500 \times 2 = -63.170783803155615 \cdots \simeq -63.2
+\end{eqnarray}
+
+これらより、以下のことが考察できる。単に$p_1(x|a_1)$、$p_2(x|a_2)$を$p_1, p_2$と書く。
+
+\begin{itemize}
+  \item
+    \textbf{AIC}は一致性は持たないが有効せを持つケースがあることが知られており、最も汎化誤差を小さくするモデルを選ぶことができる。
+    $p_2$ のほうが $p_1$ より \textbf{AIC} の値が小さいので、$p_2$のモデルは汎化誤差が少なくするモデルであると言える。
+  \item
+    \textbf{BIC}は有効性を持たないが一致性を持つケースがあると知られており、パラメータ数が一番少ないモデルを選ぶことができる。
+    結果、$p_1$ のほうが $p_2$よりパラメータ数が少ないため、 \textbf{BIC} の値は $p_1$のほうが$p_2$より小さくなっている。
+\end{itemize}
+
 \subsection*{(4)}
 
 何度も繰り返せば一度は帰無仮説が棄却されてしまうので、多角的な観点から検証する必要がある。
@@ -261,6 +284,27 @@ s0 <- sqrt(variance(X))
 \end{lstlisting}
 
 \subsection*{(2)}
+
+\begin{equation}
+\sum_{k=1}^{47} Y_i = \sum_{i=1}^{1901} X_i
+\end{equation}
+
+であることから、
+
+\begin{equation}
+M = \frac{\sum_i X_i}{47} = \frac{\sum_k n(k)}{47} m_0
+\end{equation}
+
+となる。
+
+また、
+
+\begin{eqnarray}
+S = \sqrt{\frac{1}{1901} \sum_i (X_i - m_0)^2} \sum_k \sqrt{n(k)} \nonumber \\
+\therefore \ S = s_0 \sum_k \sqrt{n(k)}
+\end{eqnarray}
+
+となる。
 
 \subsection*{(3)}
 
