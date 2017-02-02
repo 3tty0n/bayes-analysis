@@ -24,6 +24,8 @@ plot(abs(Y), main = "Y")
 M <- mean(Y)
 S <- sqrt(variance(Y))
 Z <- list()
+print(M)
+print(S)
 for (k in 1:K) {
   Z <- append(Z, (Y[k] - M)/S)
 }

@@ -42,10 +42,12 @@ def examine(df):
     ax = fig.add_subplot(1, 1, 1)
     ax.scatter(x=range(1, K + 1), y=z)
     plt.axhline(2.58, c='red')
+    plt.xlabel("index")
+    plt.ylabel("Z_k")
     for k in range(K):
         if abs(z[k]) > 2.58:
             ans.append((k + 1, z[k]))
-            plt.text(x=k, y=abs(z[k]), s=(k, z[k]))
+            plt.text(x=k, y=abs(z[k]), s=(k + 1, z[k]))
     plt.savefig('output/image/examine.png')
     plt.show()
     return ans
